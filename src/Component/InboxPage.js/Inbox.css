@@ -32,7 +32,25 @@
   width: 20%;
   max-height: 10vh;
 }
+.G {
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
 
+  border-radius: 50%;
+  background: linear-gradient(90deg, #91352a, #fffb2a, #76ca8c, white);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  overflow: hidden;
+}
+.mail {
+  color: lawngreen;
+  font-size: 30px;
+  font-weight: bolder;
+}
 .bk-inbox {
   /* background-image: linear-gradient(
     to right,
@@ -42,7 +60,7 @@
   ); */
   background-color: rgb(235, 216, 253);
 }
-.mailname {
+/* .mailname {
   position: relative;
   left: -30%;
   width: 40%;
@@ -50,4 +68,4 @@
 .mailname span {
   font-size: large;
   color: blueviolet;
-}
+} */

@@ -4,9 +4,9 @@
   box-sizing: border-box;
 }
 
-html {
+/* html {
   font-family: "Noto Sans JP", sans-serif;
-}
+} */
 
 body {
   margin: 0;
@@ -16,7 +16,7 @@ body a {
   text-decoration: none;
   color: #000;
 }
-.loading {
+/* .loading {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,4 +24,4 @@ body a {
   height: 100%;
   z-index: 20;
   background-color: rgba(242, 238, 238, 0.75);
-}
+} */

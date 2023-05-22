@@ -13,7 +13,7 @@ const MessageView = (props) => {
   };
   return (
     <React.Fragment>
-      <Card className="mt-3">
+      <Card>
         <Card.Header>
           <h3>{messageView.subject}</h3>
         </Card.Header>

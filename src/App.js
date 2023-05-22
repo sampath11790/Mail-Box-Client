@@ -21,6 +21,7 @@ const SentMessage = React.lazy(() =>
 const InboxList = React.lazy(() =>
   import("./Component/InboxPage.js/InboxList")
 );
+const LoginForm = React.lazy(() => import("./Component/AuthForm/loginForm"));
 function App() {
   let loginlocalstore = localStorage.getItem("islogin") === "true";
   // console.log(loginlocalstore);
@@ -44,25 +45,26 @@ function App() {
   }, [sendcount]);
   // console.log("app", sentItem);
   return (
-    <div>
-      <Suspense fallback={<p className="loading">Loading .....</p>}>
-        <Routes>
-          <Route path="/login" element={<AuthForm />}></Route>
-          {loginlocalstore && (
-            <Route path="/main/*" element={<InboxPage />}>
-              <Route path="inboxlist" element={<InboxList />} />
-              <Route path="text-edit" element={<TextEditing />} />
-              <Route path="sentmessage" element={<SentMessage />} />
-            </Route>
-          )}
-          {!loginlocalstore && (
-            <Route element={<Navigate replace to="login" />} />
-          )}
+    // <div>
+    <Suspense fallback={<p className="loading">Loading .....</p>}>
+      <Routes>
+        <Route path="/login" element={<AuthForm />}></Route>
+        {/* <Route path="/login" element={<LoginForm />}></Route> */}
+        {loginlocalstore && (
+          <Route path="/main/*" element={<InboxPage />}>
+            <Route path="inboxlist" element={<InboxList />} />
+            <Route path="text-edit" element={<TextEditing />} />
+            <Route path="sentmessage" element={<SentMessage />} />
+          </Route>
+        )}
+        {!loginlocalstore && (
+          <Route element={<Navigate replace to="login" />} />
+        )}
 
-          {/* <TextEditing></TextEditing> */}
-        </Routes>
-      </Suspense>
-    </div>
+        {/* <TextEditing></TextEditing> */}
+      </Routes>
+    </Suspense>
+    // </div>
   );
 }
 

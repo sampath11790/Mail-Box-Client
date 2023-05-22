@@ -1,13 +1,27 @@
 import React from "react";
-import { Col, Container, ListGroup, Row, Badge } from "react-bootstrap";
+// import { Col, Container, ListGroup, Row, Badge } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-
+import { Link } from "react-router-dom";
 import { UpdateList } from "../../Store/Mail-thunk";
-import Button from "react-bootstrap/Button";
+import MailIcon from "@mui/icons-material/Mail";
+// import Button from "react-bootstrap/Button";
 
 import { DeleteMail } from "../../Store/Mail-thunk";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { MailSliceAction } from "../../Store/MailSlice";
+import {
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  Badge,
+  Box,
+} from "@mui/material";
+// import { useDispatch } from "react-redux";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
+// import { Link } from "react-router-dom";
 
 const InboxListItem = (props) => {
   const Dispatch = useDispatch();
@@ -30,7 +44,43 @@ const InboxListItem = (props) => {
   };
   return (
     <>
-      <ListGroup.Item
+      <ListItem button onClick={ListItemHandler}>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+            padding: "10px",
+            borderRadius: "8px",
+            background: Readreceipt ? "lightblue" : "",
+          }}
+        >
+          <ListItemText>
+            {/* <div className="readreceiptbox"> */}
+            {Readreceipt && (
+              <Badge color="secondary" variant="dot" sx={{ marginRight: 2 }}>
+                {Readreceipt && <MailIcon />}
+              </Badge>
+            )}
+            {/* <Badge variant="outlined" color={Readreceipt}>
+            
+            </Badge> */}
+            {/* </div> */}
+            <Link to="mailview">{props.From}</Link>
+          </ListItemText>
+          <ListItemSecondaryAction onClick={deleteHandler}>
+            <IconButton edge="end" aria-label="delete">
+              <Button>
+                <DeleteIcon />
+              </Button>
+            </IconButton>
+          </ListItemSecondaryAction>
+        </Box>
+      </ListItem>
+
+      {/* <ListGroup.Item
         id={props.id}
         className="m-.3 "
         variant={Readreceipt && "primary"}
@@ -39,7 +89,7 @@ const InboxListItem = (props) => {
         <Row>
           <Col className="pb-3">
             <div className="readreceiptbox" onClick={ListItemHandler}>
-              {/* <div className={`${Readreceipt}`}>.</div> */}
+           
               <Badge pill bg={`${Readreceipt}`}>
                 {Readreceipt && "unread"}
               </Badge>
@@ -53,7 +103,7 @@ const InboxListItem = (props) => {
             </Button>
           </Col>
         </Row>
-      </ListGroup.Item>
+      </ListGroup.Item> */}
     </>
   );
 };

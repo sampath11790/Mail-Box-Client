@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { sendsignup, Sendlogin } from "../../Store/Action-thunk";
