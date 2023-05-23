@@ -63,7 +63,7 @@ export const getmailHandler = () => {
       const data = await gettingMailList();
       const items = data.inbox;
       let sentItem = data.sentItem;
-
+      // console.log("sentItemin mail thunk getting data", sentItem);
       const transformeddata = [];
 
       for (const key in items) {
@@ -176,7 +176,7 @@ export const UpdateMySentItem = (sentItem) => {
     };
     try {
       const data = await UpdatedingmySendingItem();
-      console.log(data);
+      // console.log(data);
 
       // Dispatch( MymailSliceAction.sendItemUpdateTrigge());
     } catch (error) {

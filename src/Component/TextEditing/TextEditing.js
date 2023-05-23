@@ -1,22 +1,31 @@
-import React from "react";
+import React, { createRef } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { Row, Col, Container, Card, Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
 import "./TextEditing.css";
 import { useDispatch } from "react-redux";
 import { sendMailHandler } from "../../Store/Mail-thunk";
 import { MymailSliceAction } from "../../Store/MymailSlice";
 import { useSelector } from "react-redux";
-import Spinner from "react-bootstrap/Spinner";
-// import { EditorState, convertFromRaw, convertToRaw } from "draft-js";
-
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  FormControl,
+  Grid,
+  InputLabel,
+  OutlinedInput,
+  TextareaAutosize,
+  Typography,
+} from "@mui/material";
+import { Mail } from "@mui/icons-material";
 const TextEditing = () => {
   const Disptach = useDispatch();
-  const Enteredemail = React.createRef(null);
-  const Enteredsubject = React.createRef(null);
-  const Enteredtext = React.createRef(null);
+  const Enteredemail = createRef(null);
+  const Enteredsubject = createRef(null);
+  const Enteredtext = createRef(null);
   const sentItemlist = useSelector((state) => state.mymail.sentItem);
+  let usermail = localStorage.getItem("mailid");
 
   const FormsubmitHandler = (event) => {
     event.preventDefault();
@@ -32,14 +41,17 @@ const TextEditing = () => {
     if (mailData.email === "") {
       return;
     }
-    Disptach(sendMailHandler(mailData));
+    // Disptach(sendMailHandler(mailData));
     if (sentItemlist.length > 0) {
       let oldlist = sentItemlist;
       let sentItem = [{ ...mailData, id: uid }, ...oldlist];
 
-      console.log(sentItem);
+      // console.log("sentItem in text editor", sentItem);
       Disptach(MymailSliceAction.updateSendItem(sentItem));
+      Disptach(sendMailHandler(mailData));
     } else {
+      // console.log("sentItem in text editor");
+      Disptach(sendMailHandler(mailData));
       Disptach(MymailSliceAction.updateSendItem([{ ...mailData, id: uid }]));
     }
     Enteredemail.current.value = null;
@@ -49,57 +61,86 @@ const TextEditing = () => {
   };
   return (
     <React.Fragment>
-      <Container fluid>
-        <Row>
-          <Col>
-            <Form className="pt-1  pr-3" onSubmit={FormsubmitHandler}>
-              <Card style={{ width: "50rem" }}>
-                {/* {loadingspinner && (
-                  <Spinner animation="border" variant="primary" />
-                )} */}
-                {/* <Card.Header>
-                  <h3>welcome </h3>
-                </Card.Header> */}
-                <Card.Body className="colours">
-                  <Form.Group controlId="email">
-                    <Form.Label>Email Address</Form.Label>
-                    <Form.Control
-                      size="sm"
-                      type="email"
-                      placeholder="Enter email"
-                      ref={Enteredemail}
-                    ></Form.Control>
-                  </Form.Group>
-                  <Form.Group controlId="subject">
-                    <Form.Label>subject</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter subject"
-                      ref={Enteredsubject}
-                    ></Form.Control>
-                  </Form.Group>
-                  <Form.Group controlId="message">
-                    <Form.Label>message</Form.Label>
-                    <Form.Control as="textarea" rows={5} ref={Enteredtext} />
-                  </Form.Group>
-                </Card.Body>
+      <Container maxWidth="md">
+        <Box mt={3}>
+          <Card>
+            <Box p={2} sx={{ background: "lightgreen", borderRadius: 5 }}>
+              <Typography variant="h5" component="h2" mb={2}>
+                Compose Email
+                <Mail style={{ marginRight: "8px" }} />
+              </Typography>
 
-                <Card.Footer>
-                  <Editor
-                    // editorState={editorState}
-                    toolbarClassName="toolbarClassName"
-                    wrapperClassName="wrapperClassName"
-                    editorClassName="editorClassName"
-                    // onEditorStateChange={updateTextDescription}
-                  />
-                  <Button variant="primary" type="submit">
-                    Send
-                  </Button>
-                </Card.Footer>
-              </Card>
-            </Form>
-          </Col>
-        </Row>
+              <form onSubmit={FormsubmitHandler}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={12}>
+                    <FormControl fullWidth>
+                      <InputLabel htmlFor="from">Form</InputLabel>
+                      <OutlinedInput
+                        sx={{ background: "white" }}
+                        id="from"
+                        type="email"
+                        placeholder="From"
+                        value={usermail}
+                        label="Email Address"
+                        disabled={true}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <FormControl fullWidth>
+                      <InputLabel htmlFor="email">Email Address</InputLabel>
+                      <OutlinedInput
+                        id="email"
+                        type="email"
+                        inputRef={Enteredemail}
+                        label="Email Address"
+                        sx={{ background: "white" }}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <FormControl fullWidth>
+                      <InputLabel htmlFor="subject">Subject</InputLabel>
+                      <OutlinedInput
+                        id="subject"
+                        type="text"
+                        inputRef={Enteredsubject}
+                        label="Subject"
+                        sx={{ background: "white" }}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputLabel htmlFor="message">Message</InputLabel>
+                    <FormControl fullWidth>
+                      <TextareaAutosize
+                        id="message"
+                        rows={5}
+                        minRows={3}
+                        // placeholder="Enter message"
+                        ref={Enteredtext}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Editor
+                      // editorState={editorState}
+                      toolbarClassName="toolbarClassName"
+                      wrapperClassName="wrapperClassName"
+                      editorClassName="editorClassName"
+                      // onEditorStateChange={updateTextDescription}
+                    />
+                  </Grid>
+                  <Box mt={3} ml={3} display="flex" justifyContent="flex-end">
+                    <Button variant="contained" color="primary" type="submit">
+                      Send
+                    </Button>
+                  </Box>
+                </Grid>
+              </form>
+            </Box>
+          </Card>
+        </Box>
       </Container>
     </React.Fragment>
   );

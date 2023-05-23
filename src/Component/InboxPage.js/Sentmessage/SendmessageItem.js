@@ -1,10 +1,18 @@
 import React from "react";
-import { Col, Container, ListGroup, Row } from "react-bootstrap";
+// import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { MymailSliceAction } from "../../../Store/MymailSlice";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  Box,
+  Button,
+} from "@mui/material";
 const SentMessageListItem = (props) => {
   const sentItems = useSelector((state) => state.mymail.sentItem);
   const Dispatch = useDispatch();
@@ -29,28 +37,43 @@ const SentMessageListItem = (props) => {
   };
   return (
     <>
-      <ListGroup.Item
+      <ListItem
+        button
         id={props.id}
         className="m-.3 "
         key={props.id}
         variant="success"
       >
-        <Container>
-          <Row>
-            <Col className="pb-3">
-              <div className="readreceiptbox" onClick={ListItemHandler}>
-                <Link to="sentmailview">{props.email}</Link>
-              </div>
-            </Col>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+            padding: "10px",
+            borderRadius: "8px",
+            background: Readreceipt ? "lightblue" : "",
+          }}
+          onClick={ListItemHandler}
+        >
+          <ListItemText>
+            <Link to="sentmailview">{props.email}</Link>
+          </ListItemText>
+        </Box>
 
-            <Col md={1} style={{ height: "20px" }}>
-              <Button variant="secondary" onClick={deleteHandler}>
-                delete
+        <Box sx={{ margin: 3 }}>
+          <ListItemSecondaryAction onClick={deleteHandler}>
+            <IconButton edge="end" aria-label="delete">
+              <Button sx={{ marginLeft: "20px" }}>
+                <span>
+                  <DeleteIcon />
+                </span>
               </Button>
-            </Col>
-          </Row>
-        </Container>
-      </ListGroup.Item>
+            </IconButton>
+          </ListItemSecondaryAction>
+        </Box>
+      </ListItem>
     </>
   );
 };

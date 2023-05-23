@@ -22,7 +22,7 @@ const MymailSlice = createSlice({
       // state.sentItem = action.payload;
       // console.log(action.payload.length === 0);
       state.loadingspinner = !state.loadingspinner;
-      state.sendcount++;
+      // state.sendcount++;
       if (action.payload.length === 0) {
         state.sentItem = [];
         state.sendcount++;

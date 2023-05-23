@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
 import SentMessageListItem from "./SendmessageItem";
-
-import { useSelector } from "react-redux";
+import { List } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+// import { getmailHandler } from "../../../Store/Mail-thunk";
 const SentMessage = () => {
   const sentItem = useSelector((state) => state.mymail.sentItem);
   // console.log(sentItem);
-
+  // const Disptach = useDispatch();
+  // useEffect(() => {
+  //   Disptach(getmailHandler());
+  // }, []);
   return (
     <>
-      <ListGroup as="ul">
+      <List>
         {sentItem.map((item) => (
           <SentMessageListItem
             key={item.id}
@@ -20,7 +24,7 @@ const SentMessage = () => {
             readreceipt={item.readreceipt}
           ></SentMessageListItem>
         ))}
-      </ListGroup>
+      </List>
     </>
   );
 };

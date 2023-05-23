@@ -1,10 +1,5 @@
-// import AuthForm from "./Component/AuthForm/AuthForm";
-// import TextEditing from "./Component/TextEditing/TextEditing";
-// import InboxPage from "./Component/InboxPage.js/InboxPage";
 import { Route, Routes, Navigate } from "react-router-dom";
-// import SentMessage from "./Component/InboxPage.js/Sentmessage/SentMessage";
 import React, { useEffect, Suspense } from "react";
-// import InboxList from "./Component/InboxPage.js/InboxList";
 import { useSelector, useDispatch } from "react-redux";
 import { UpdateMySentItem } from "./Store/Mail-thunk";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +16,7 @@ const SentMessage = React.lazy(() =>
 const InboxList = React.lazy(() =>
   import("./Component/InboxPage.js/InboxList")
 );
-const LoginForm = React.lazy(() => import("./Component/AuthForm/loginForm"));
+
 function App() {
   let loginlocalstore = localStorage.getItem("islogin") === "true";
   // console.log(loginlocalstore);
@@ -41,7 +36,10 @@ function App() {
   const sentItem = useSelector((state) => state.mymail.sentItem);
   const sendcount = useSelector((state) => state.mymail.sendcount);
   useEffect(() => {
-    Dispatch(UpdateMySentItem(sentItem));
+    // console.log("updateing seny mail",sentItem);
+    if (sendcount > 0) {
+      Dispatch(UpdateMySentItem(sentItem));
+    }
   }, [sendcount]);
   // console.log("app", sentItem);
   return (
@@ -49,7 +47,7 @@ function App() {
     <Suspense fallback={<p className="loading">Loading .....</p>}>
       <Routes>
         <Route path="/login" element={<AuthForm />}></Route>
-        {/* <Route path="/login" element={<LoginForm />}></Route> */}
+
         {loginlocalstore && (
           <Route path="/main/*" element={<InboxPage />}>
             <Route path="inboxlist" element={<InboxList />} />

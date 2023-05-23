@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const SentMessageView = (props) => {
   const mymailmessageView = useSelector((state) => state.mymail.messageView);
   const navigate = useNavigate();
-  console.log(mymailmessageView, " mymailmessageView");
+  // console.log(mymailmessageView, " mymailmessageView");
   const replybuttonHandler = () => {
     // navigate("/main/text-edit");
   };

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Inbox.css";
-// import { Container, Row, Col, ListGroup, Badge } from "react-bootstrap";
+
 import { Outlet } from "react-router-dom";
 import InboxNavbar from "./InboxNavbar";
 import { getmailHandler } from "../../Store/Mail-thunk";
@@ -9,8 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import MessageView from "./MessageView";
 import { Link, Route, Routes } from "react-router-dom";
 import SentMessageView from "./Sentmessage/sentMessageView";
-import { Container, Grid, List, ListItem, Badge, Box } from "@mui/material";
-// import ToggleButton from "./ToggleMenuButton";
+import { MailOutline, Send } from "@mui/icons-material";
+import { Create, Drafts } from "@mui/icons-material";
+import { Grid, List, Badge, IconButton, ListItem } from "@mui/material";
+
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const InboxPage = () => {
   const count = useSelector((state) => state.mail.count);
@@ -27,24 +30,22 @@ const InboxPage = () => {
     }
   }, [count]);
 
-  // calling the backend api every 2 seconds to update inbox
+  useEffect(() => {
+    const intervelid = setInterval(() => {
+      // console.log("setintervelid", intervelid);
+      Disptach(getmailHandler());
+    }, 2000);
 
-  // useEffect(() => {
-  //   const intervelid = setInterval(() => {
-  //     console.log("setintervelid", intervelid);
-  //     Disptach(getmailHandler());
-  //   }, 2000);
-
-  //   return () => {
-  //     console.log("clearintervelid", intervelid);
-  //     clearInterval(intervelid);
-  //   };
-  // });
+    return () => {
+      // console.log("clearintervelid", intervelid);
+      clearInterval(intervelid);
+    };
+  });
 
   const sendmailcartHandler = () => {
     Disptach(getmailHandler());
   };
-
+  const liststyle = { background: "gold", borderRadius: 3, marginTop: 3 };
   return (
     <>
       <InboxNavbar></InboxNavbar>
@@ -59,26 +60,62 @@ const InboxPage = () => {
         >
           <List component="nav">
             <Link to="text-edit" style={{ textDecoration: "none" }}>
-              <ListItem style={{ color: "white" }}>Compose</ListItem>
+              <ListItem button sx={liststyle}>
+                Compose
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  style={{ marginLeft: "auto" }}
+                >
+                  <Create></Create>
+                </IconButton>
+              </ListItem>
             </Link>
             <Link to="inboxlist" style={{ textDecoration: "none" }}>
-              <ListItem button>
-                {/* <div className="indbox-cont"> */}
-                <p style={{ color: "white" }}>Inbox</p>
-                <Badge badgeContent={unread} color="primary">
-                  {/* Unread */}
-                </Badge>
-                {/* </div> */}
+              <ListItem button sx={liststyle}>
+                Inbox
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  style={{ marginLeft: "auto" }}
+                >
+                  {unread > 0 ? (
+                    <Badge badgeContent={unread} color="error">
+                      <NotificationsIcon />
+                    </Badge>
+                  ) : (
+                    <MailOutline></MailOutline>
+                  )}
+                </IconButton>
               </ListItem>
             </Link>
 
             <Link to="sentmessage" style={{ textDecoration: "none" }}>
-              <ListItem
-                button
-                onClick={sendmailcartHandler}
-                style={{ color: "white" }}
-              >
+              <ListItem button onClick={sendmailcartHandler} sx={liststyle}>
                 SentMail
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  style={{ marginLeft: "auto" }}
+                >
+                  <Send></Send>
+                </IconButton>
+              </ListItem>
+            </Link>
+            <Link to="#" style={{ textDecoration: "none" }}>
+              <ListItem button sx={liststyle}>
+                Draft
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  style={{ marginLeft: "auto" }}
+                >
+                  <Drafts></Drafts>
+                </IconButton>
               </ListItem>
             </Link>
           </List>
@@ -94,63 +131,10 @@ const InboxPage = () => {
               element={<SentMessageView />}
             />
           </Routes>
-          {/* <ToggleButton></ToggleButton> */}
+
           <Outlet />
         </Grid>
       </Grid>
-
-      {/* <InboxNavbar></InboxNavbar>
-      <Container className=" bk-inbox" fluid>
-        <Row style={{ height: "650px" }}>
-          <Col xs={2} className=" bg-info" variant="primary">
-            <ListGroup className="p-2" as="ul">
-              <Link to="text-edit">
-                <ListGroup.Item className="m-1 bg-" action>
-                  Compose
-                </ListGroup.Item>
-              </Link>
-              <Link to="inboxlist">
-                <ListGroup.Item className="m-1 bg-" action>
-                  <div className="indbox-cont">
-                    <p>inbox</p>
-
-                    <Badge bg="primary">{unread}</Badge>
-
-                 
-                  </div>
-                </ListGroup.Item>
-              </Link>
-             
-             
-              <Link to="sentmessage">
-                <ListGroup.Item
-                  className="m-1"
-                  action
-                  onClick={sendmailcartHandler}
-                >
-                  SentMail
-                </ListGroup.Item>
-              </Link>
-            </ListGroup>
-          </Col>
-
-          <Col xs={10} className="">
-        
-            <Routes>
-              <Route path="/inboxlist/mailview" element={<MessageView />} />
-            </Routes>
-            <Routes>
-              <Route
-                path="/sentmessage/sentmailview"
-                element={<SentMessageView />}
-              />
-            </Routes>
-            
-            <Outlet></Outlet>
-           
-          </Col>
-        </Row>
-      </Container> */}
     </>
   );
 };

@@ -5,6 +5,8 @@ import { Col, Row, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { sendsignup, Sendlogin } from "../../Store/Action-thunk";
 import { UisliceAction } from "../../Store/Uivisible";
+import { LocalActivityOutlined, LockPersonRounded } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 const AuthForm = () => {
   const Disptach = useDispatch();
@@ -42,7 +44,17 @@ const AuthForm = () => {
             className="shadow p-3 mt-5 bg-white rounded"
             onSubmit={onsubmitHandler}
           >
-            <h3>{islogin ? "Login" : "SignUp"}</h3>
+            <h3>
+              {islogin ? "Login" : "SignUp"}
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+                style={{ marginLeft: "auto" }}
+              >
+                <LockPersonRounded />
+              </IconButton>
+            </h3>
             <Form.Group controlId="email">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
@@ -86,6 +98,8 @@ const AuthForm = () => {
               </Button>
             </Form.Group>
           </Form>
+          <p>TestLogin id =demo@gmail.com</p>
+          <p>TestLogin password =12345</p>
         </Col>
       </Row>
     </Container>
