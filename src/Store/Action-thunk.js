@@ -22,7 +22,7 @@ export const sendsignup = (obj) => {
         alert(data.error.message);
         throw new Error(data.error.message);
       }
-
+      alert("Signup successfull now login your account");
       return data;
     };
     try {

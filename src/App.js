@@ -16,7 +16,7 @@ const SentMessage = React.lazy(() =>
 const InboxList = React.lazy(() =>
   import("./Component/InboxPage.js/InboxList")
 );
-
+const Profile = React.lazy(() => import("./Component/profile/Profile"));
 function App() {
   let loginlocalstore = localStorage.getItem("islogin") === "true";
   // console.log(loginlocalstore);
@@ -50,6 +50,7 @@ function App() {
 
         {loginlocalstore && (
           <Route path="/main/*" element={<InboxPage />}>
+            <Route path="profile" element={<Profile />} />
             <Route path="inboxlist" element={<InboxList />} />
             <Route path="text-edit" element={<TextEditing />} />
             <Route path="sentmessage" element={<SentMessage />} />

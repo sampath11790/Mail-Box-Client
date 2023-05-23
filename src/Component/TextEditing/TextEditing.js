@@ -74,12 +74,12 @@ const TextEditing = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={12}>
                     <FormControl fullWidth>
-                      <InputLabel htmlFor="from">Form</InputLabel>
+                      <InputLabel htmlFor="form">Form</InputLabel>
                       <OutlinedInput
                         sx={{ background: "white" }}
-                        id="from"
+                        id="form"
                         type="email"
-                        placeholder="From"
+                        placeholder="Form"
                         value={usermail}
                         label="Email Address"
                         disabled={true}

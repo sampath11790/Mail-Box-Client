@@ -99,7 +99,7 @@ const AuthForm = () => {
             </Form.Group>
           </Form>
           <p>TestLogin id =demo@gmail.com</p>
-          <p>TestLogin password =12345</p>
+          <p>TestLogin password =123456</p>
         </Col>
       </Row>
     </Container>

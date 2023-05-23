@@ -20,7 +20,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import LogoutIcon from "@mui/icons-material/ExitToApp";
 import "./Inbox.css";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Link } from "@mui/material";
 // import { ToggleButton } from "react-bootstrap";
 import ToggleButtonElement from "./ToggleMenuButton";
 const Search = styled("div")(({ theme }) => ({
@@ -93,6 +93,7 @@ export default function InboxNavbar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+
     handleMobileMenuClose();
   };
 
@@ -117,7 +118,9 @@ export default function InboxNavbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <span onClick={() => navigate("/main/profile")}>Profile</span>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -139,12 +142,13 @@ export default function InboxNavbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={() => navigate("/main/inboxlist")}>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={unread} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
+
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
@@ -159,7 +163,7 @@ export default function InboxNavbar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={() => navigate("/main/profile")}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -227,11 +231,13 @@ export default function InboxNavbar() {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={() => navigate("/main/inboxlist")}
             >
               <Badge badgeContent={unread} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
+
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
