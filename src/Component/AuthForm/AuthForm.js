@@ -37,8 +37,8 @@ const AuthForm = () => {
     Disptach(UisliceAction.setisLogin());
   };
   return (
-    <Container className="pt-5">
-      <Row className="justify-content-md-center">
+    <Container className="pt-5 ">
+      <Row className="justify-content-md-center bg-green">
         <Col xs={12} md={4}>
           <Form
             className="shadow p-3 mt-5 bg-white rounded"

@@ -175,14 +175,13 @@ export default function InboxNavbar() {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={logoutHandler}>
         <IconButton
           size="large"
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-          onClick={logoutHandler}
         >
           <LogoutIcon></LogoutIcon>
         </IconButton>
