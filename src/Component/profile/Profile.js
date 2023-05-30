@@ -17,7 +17,7 @@ const Profile = () => {
             <span>age:</span>32
           </p>
           <p>
-            <span>Education:</span>Diploma in Mchanical engineering
+            <span>Education:</span>Diploma in Mechanical engineering
           </p>
           <p>
             <span>place :</span>Bangalore
