@@ -139,6 +139,7 @@ const AuthForm = () => {
                   padding: "0 5",
                   background: "gold",
                   fontSize: { sx: 14, md: 17 },
+                  color: "black",
                 }}
               >
                 {islogin ? "SignUp" : "Login  account"}
