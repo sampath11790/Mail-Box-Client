@@ -102,28 +102,6 @@ export default function InboxNavbar() {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <span onClick={() => navigate("/main/profile")}>Profile</span>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -140,7 +118,7 @@ export default function InboxNavbar() {
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+      onClick={handleMobileMenuClose}
     >
       <MenuItem onClick={() => navigate("/main/inboxlist")}>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -244,13 +222,14 @@ export default function InboxNavbar() {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={() => navigate("/main/profile")}
               color="inherit"
             >
               <Avatar
                 alt="Cindy Baker"
                 src="https://c.stocksy.com/a/IpI600/z9/1502340.jpg"
               />
+              <span style={{ fontSize: 16 }}>Profile</span>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}>
@@ -285,7 +264,6 @@ export default function InboxNavbar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }

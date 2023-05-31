@@ -28,7 +28,8 @@ body a {
 .formpage-image {
   position: absolute;
   z-index: -10;
-  top: -20px;
+  top: -40px;
+  left: 10px;
 }
 .formpage-image img {
   /* width: 625px;
@@ -40,7 +41,7 @@ body a {
   font-family: "Century Gothic";
   text-align: start;
   position: relative;
-  bottom: -130px;
+  bottom: -110px;
   /* right: -90px; */
   /* background: rgb(211, 250, 211); */
   border-radius: 30px;
@@ -68,6 +69,7 @@ body a {
     width: 100%;
     bottom: 0;
     border-radius: 3px;
+    height: 100%;
   }
   .g-letter {
     color: green;
@@ -77,5 +79,11 @@ body a {
     color: gold;
     font-size: 45px;
     /* background: #000; */
+  }
+  .formpage-image {
+    position: absolute;
+    z-index: -10;
+    top: -40px;
+    left: 20px;
   }
 }

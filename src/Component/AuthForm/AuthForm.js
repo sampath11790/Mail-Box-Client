@@ -43,7 +43,7 @@ const AuthForm = () => {
     Disptach(UisliceAction.setisLogin());
   };
   return (
-    <Container className="pt-5 ">
+    <Container className="pt-2 ">
       <Box
         sx={{
           width: "100%",
@@ -66,7 +66,7 @@ const AuthForm = () => {
           A place to connect, communicate, and stay organized. Join{" "}
           <span style={{ color: "green", fontSize: 30 }}>G</span>
           <span style={{ color: "gold", fontSize: 20 }}>Mail</span>
-          today!"
+          today!
         </Typography>
       </Box>
       <Row className="justify-content-md-center ">

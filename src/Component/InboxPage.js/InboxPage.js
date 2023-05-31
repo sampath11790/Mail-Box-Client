@@ -19,7 +19,7 @@ const InboxPage = () => {
   const count = useSelector((state) => state.mail.count);
   const unread = useSelector((state) => state.mail.unread);
   const Disptach = useDispatch();
-
+  let token = localStorage.getItem("id");
   useEffect(() => {
     let token = localStorage.getItem("id");
     Disptach(getmailHandler(token));
@@ -33,17 +33,17 @@ const InboxPage = () => {
     }
   }, [count]);
 
-  // useEffect(() => {
-  //   const intervelid = setInterval(() => {
-  //     // console.log("setintervelid", intervelid);
-  //     Disptach(getmailHandler(token));
-  //   }, 2000);
+  useEffect(() => {
+    const intervelid = setInterval(() => {
+      // console.log("setintervelid", intervelid);
+      Disptach(getmailHandler(token));
+    }, 2000);
 
-  //   return () => {
-  //     // console.log("clearintervelid", intervelid);
-  //     clearInterval(intervelid);
-  //   };
-  // });
+    return () => {
+      // console.log("clearintervelid", intervelid);
+      clearInterval(intervelid);
+    };
+  });
 
   const sendmailcartHandler = () => {
     Disptach(getmailHandler());

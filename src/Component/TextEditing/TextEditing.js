@@ -4,7 +4,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./TextEditing.css";
 import { useDispatch } from "react-redux";
 import { PostDraft, sendMailHandler } from "../../Store/Mail-thunk";
-import { MymailSliceAction } from "../../Store/MymailSlice";
+
 import { useSelector } from "react-redux";
 import {
   Box,
@@ -134,7 +134,11 @@ const TextEditing = () => {
                     />
                   </Grid>
                   <Box mt={3} ml={3} display="flex" justifyContent="flex-end">
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button
+                      variant="contained"
+                      sx={{ background: "green" }}
+                      type="submit"
+                    >
                       Send
                     </Button>
                   </Box>
@@ -145,7 +149,11 @@ const TextEditing = () => {
                     justifyContent="flex-end"
                     onClick={DraftHandler}
                   >
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button
+                      variant="contained"
+                      sx={{ background: "gold", color: "black" }}
+                      type="submit"
+                    >
                       Save
                     </Button>
                   </Box>

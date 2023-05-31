@@ -32,24 +32,18 @@
   width: 20%;
   max-height: 10vh;
 }
+
 .G {
   position: relative;
-  font-family: Arial, sans-serif;
+  color: gold;
   font-size: 50px;
+  font-family: "Century Gothic";
   font-weight: bold;
-  text-transform: uppercase;
-
-  border-radius: 50%;
-  background: linear-gradient(90deg, #91352a, #fffb2a, #76ca8c, white);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  overflow: hidden;
 }
 .mail {
-  color: lawngreen;
+  color: white;
   font-size: 30px;
-  font-weight: bolder;
+  font-family: "Century Gothic";
 }
 .bk-inbox {
   /* background-image: linear-gradient(
