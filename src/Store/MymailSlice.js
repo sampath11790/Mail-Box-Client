@@ -3,8 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialmystate = {
   sentItem: [],
   messageView: {},
-
+  Draft: [],
   sendcount: 0,
+  DarftMessage: {},
+  calldraft: 0,
 };
 
 const MymailSlice = createSlice({
@@ -30,6 +32,15 @@ const MymailSlice = createSlice({
         state.sentItem = action.payload;
         state.sendcount++;
       }
+    },
+    SetDraftDate(state, action) {
+      state.Draft = action.payload;
+    },
+    Viewdarft(state, action) {
+      state.DarftMessage = action.payload;
+    },
+    callgetDraft(state, action) {
+      state.calldraft++;
     },
   },
 });

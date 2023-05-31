@@ -16,15 +16,17 @@ const AuthForm = () => {
   const EnteredConfirmPassword = React.createRef(null);
   const onsubmitHandler = (event) => {
     event.preventDefault();
+
     const obj = {
       email: Enteredemail.current.value,
       password: EnteredPassword.current.value,
-      returnSecureToken: true,
     };
+
     if (obj.email === "" && obj.password === "") {
       return;
     }
     if (islogin) {
+      console.log("obj", obj);
       Disptach(Sendlogin(obj));
     }
     if (!islogin && obj.password === EnteredConfirmPassword.current.value) {

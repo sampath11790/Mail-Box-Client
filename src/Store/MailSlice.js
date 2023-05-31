@@ -16,13 +16,9 @@ const MailSlice = createSlice({
   reducers: {
     setSentData(state, action) {
       state.sendMail = !state.sendMail;
-      state.count = state.count + 1;
-
-      console.log("success");
+      state.count++;
     },
-    // setGetMail(state, action) {
-    //   console.log("getmail", state.unread);
-    // },
+
     addItem(state, action) {
       state.items = action.payload;
 
@@ -34,24 +30,16 @@ const MailSlice = createSlice({
         return;
       });
       state.unread = Unreadmessage;
-      // console.log(state.unread);
-      // console.log(action.payload.transformeddata);
     },
     updataItems(state, action) {
-      state.count = state.count + 1;
+      state.count++;
     },
     DeleteItem(state, action) {
-      state.count = state.count + 1;
-      console.log("deleted");
+      state.count++;
     },
     addMessageViewinfo(state, action) {
       state.messageView = action.payload;
-      // console.log(" addMessageViewinfo", action.payload);
     },
-    // RemovesentMail(state, action) {
-    //   // console.log(state.sentItem);
-    //   state.sentItem = action.payload;
-    // },
   },
 });
 export const MailSliceAction = MailSlice.actions;

@@ -3,7 +3,7 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./TextEditing.css";
 import { useDispatch } from "react-redux";
-import { sendMailHandler } from "../../Store/Mail-thunk";
+import { PostDraft, sendMailHandler } from "../../Store/Mail-thunk";
 import { MymailSliceAction } from "../../Store/MymailSlice";
 import { useSelector } from "react-redux";
 import {
@@ -26,38 +26,40 @@ const TextEditing = () => {
   const Enteredtext = createRef(null);
   const sentItemlist = useSelector((state) => state.mymail.sentItem);
   let usermail = localStorage.getItem("mailid");
-
+  let token = localStorage.getItem("id");
   const FormsubmitHandler = (event) => {
     event.preventDefault();
 
-    let uid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+    // let uid = Date.now().toString(36) + Math.random().toString(36).substr(2);
     const mailData = {
-      email: Enteredemail.current.value,
+      To: Enteredemail.current.value,
       subject: Enteredsubject.current.value,
       text: Enteredtext.current.value,
-      From: localStorage.getItem("mailid"),
+      // From: localStorage.getItem("mailid"),
       readreceipt: false,
     };
-    if (mailData.email === "") {
+    if (mailData.To === "") {
       return;
     }
-    // Disptach(sendMailHandler(mailData));
-    if (sentItemlist.length > 0) {
-      let oldlist = sentItemlist;
-      let sentItem = [{ ...mailData, id: uid }, ...oldlist];
 
-      // console.log("sentItem in text editor", sentItem);
-      Disptach(MymailSliceAction.updateSendItem(sentItem));
-      Disptach(sendMailHandler(mailData));
-    } else {
-      // console.log("sentItem in text editor");
-      Disptach(sendMailHandler(mailData));
-      Disptach(MymailSliceAction.updateSendItem([{ ...mailData, id: uid }]));
-    }
+    Disptach(sendMailHandler(mailData, token));
+
     Enteredemail.current.value = null;
     Enteredsubject.current.value = null;
     Enteredtext.current.value = null;
-    console.log(mailData, "TextEditing-FormsubmitHandler");
+  };
+  const DraftHandler = () => {
+    const mailData = {
+      To: Enteredemail.current.value,
+      subject: Enteredsubject.current.value,
+      text: Enteredtext.current.value,
+      // From: localStorage.getItem("mailid"),
+      readreceipt: false,
+    };
+    Disptach(PostDraft(mailData, token));
+    Enteredemail.current.value = null;
+    Enteredsubject.current.value = null;
+    Enteredtext.current.value = null;
   };
   return (
     <React.Fragment>
@@ -74,7 +76,7 @@ const TextEditing = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={12}>
                     <FormControl fullWidth>
-                      <InputLabel htmlFor="from">Form</InputLabel>
+                      <InputLabel htmlFor="from">From</InputLabel>
                       <OutlinedInput
                         sx={{ background: "white" }}
                         id="from"
@@ -134,6 +136,17 @@ const TextEditing = () => {
                   <Box mt={3} ml={3} display="flex" justifyContent="flex-end">
                     <Button variant="contained" color="primary" type="submit">
                       Send
+                    </Button>
+                  </Box>
+                  <Box
+                    mt={3}
+                    ml={3}
+                    display="flex"
+                    justifyContent="flex-end"
+                    onClick={DraftHandler}
+                  >
+                    <Button variant="contained" color="primary" type="submit">
+                      Save
                     </Button>
                   </Box>
                 </Grid>

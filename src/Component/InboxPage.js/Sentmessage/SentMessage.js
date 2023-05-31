@@ -17,11 +17,11 @@ const SentMessage = () => {
         {sentItem.map((item) => (
           <SentMessageListItem
             key={item.id}
-            email={item.email}
+            To={item.To}
             subject={item.subject}
             text={item.text}
             id={item.id}
-            readreceipt={item.readreceipt}
+            createdAt={item.createdAt}
           ></SentMessageListItem>
         ))}
       </List>

@@ -18,6 +18,7 @@ const InboxList = () => {
             id={item.id}
             From={item.From}
             readreceipt={item.readreceipt}
+            createdAt={item.createdAt}
           ></InboxListItem>
         ))}
       </List>

@@ -17,6 +17,9 @@ const InboxList = React.lazy(() =>
   import("./Component/InboxPage.js/InboxList")
 );
 const Profile = React.lazy(() => import("./Component/profile/Profile"));
+const DraftMessage = React.lazy(() =>
+  import("./Component/InboxPage.js/DrfatMail/Daftmessage")
+);
 function App() {
   let loginlocalstore = localStorage.getItem("islogin") === "true";
   // console.log(loginlocalstore);
@@ -37,9 +40,9 @@ function App() {
   const sendcount = useSelector((state) => state.mymail.sendcount);
   useEffect(() => {
     // console.log("updateing seny mail",sentItem);
-    if (sendcount > 0) {
-      Dispatch(UpdateMySentItem(sentItem));
-    }
+    // if (sendcount > 0) {
+    //   Dispatch(UpdateMySentItem(sentItem));
+    // }
   }, [sendcount]);
   // console.log("app", sentItem);
   return (
@@ -54,6 +57,7 @@ function App() {
             <Route path="inboxlist" element={<InboxList />} />
             <Route path="text-edit" element={<TextEditing />} />
             <Route path="sentmessage" element={<SentMessage />} />
+            <Route path="draft-mail" element={<DraftMessage />} />
           </Route>
         )}
         {!loginlocalstore && (

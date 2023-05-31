@@ -21,6 +21,7 @@ const SentMessageView = (props) => {
         </Card.Body>
         <Card.Footer>
           <h6>{mymailmessageView.email}</h6>
+          <p style={{ marginTop: "5px" }}>{mymailmessageView.createdAt}</p>
           <Button onClick={replybuttonHandler}>ReSend</Button>
         </Card.Footer>
       </Card>

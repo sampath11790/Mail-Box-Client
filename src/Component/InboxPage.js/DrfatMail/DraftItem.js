@@ -1,9 +1,9 @@
 import React from "react";
-// import { Col, Container, ListGroup, Row } from "react-bootstrap";
+
 import { useDispatch, useSelector } from "react-redux";
-// import Button from "react-bootstrap/Button";
+
 import { Link } from "react-router-dom";
-import { MymailSliceAction } from "../../../Store/MymailSlice";
+// import { MymailSliceAction } from "../../../Store/MymailSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   ListItem,
@@ -13,8 +13,10 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { DeltesentItem } from "../../../Store/Mail-thunk";
-const SentMessageListItem = (props) => {
+import { MymailSliceAction } from "../../../Store/MymailSlice";
+import { DeleteDraft } from "../../../Store/Mail-thunk";
+// import { DeltesentItem } from "../../../Store/Mail-thunk";
+const DraftItem = (props) => {
   const sentItems = useSelector((state) => state.mymail.sentItem);
   const Dispatch = useDispatch();
 
@@ -22,21 +24,12 @@ const SentMessageListItem = (props) => {
   if (!props.readreceipt) {
     Readreceipt = "readreceipt";
   }
-  const ListItemHandler = () => {
-    // console.log("sendmeeage page", props);
-    Dispatch(MymailSliceAction.addMessageViewinfo(props));
+  const ListItemHandler = (props) => {
+    Dispatch(MymailSliceAction.Viewdarft(props));
   };
   const deleteHandler = (id) => {
     let token = localStorage.getItem("id");
-    Dispatch(DeltesentItem(id, token));
-    // console.log("delete");
-    // let oldarry = sentItems;
-    // if (oldarry.length !== 1) {
-    //   let sentItem = oldarry.filter((item) => item.id !== props.id);
-    //   Dispatch(MymailSliceAction.updateSendItem(sentItem));
-    // } else {
-    //   Dispatch(MymailSliceAction.updateSendItem([]));
-    // }
+    Dispatch(DeleteDraft(id, token));
   };
   const ExtractTime = (date) => {
     const currentDate = new Date(date);
@@ -55,7 +48,7 @@ const SentMessageListItem = (props) => {
         key={props.id}
         variant="success"
       >
-        {console.log(props)}
+        {/* {console.log(props)} */}
         <Box
           sx={{
             width: "100%",
@@ -65,12 +58,12 @@ const SentMessageListItem = (props) => {
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
             padding: "10px",
             borderRadius: "8px",
-            background: "rgb(211, 255, 206)",
+            background: "rgb(252, 251, 167)",
           }}
-          onClick={ListItemHandler}
+          onClick={() => ListItemHandler(props)}
         >
           <ListItemText>
-            <Link to="sentmailview">
+            <Link to="draftmail-view">
               To:{props.To}
               <Box
                 sx={{
@@ -102,4 +95,4 @@ const SentMessageListItem = (props) => {
     </>
   );
 };
-export default SentMessageListItem;
+export default DraftItem;

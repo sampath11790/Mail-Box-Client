@@ -3,7 +3,7 @@ import "./Inbox.css";
 
 import { Outlet } from "react-router-dom";
 import InboxNavbar from "./InboxNavbar";
-import { getmailHandler } from "../../Store/Mail-thunk";
+import { getDraft, getmailHandler } from "../../Store/Mail-thunk";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MessageView from "./MessageView";
@@ -14,38 +14,48 @@ import { Create, Drafts } from "@mui/icons-material";
 import { Grid, List, Badge, IconButton, ListItem } from "@mui/material";
 
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import DraftMessageView from "./DrfatMail/draftMessageView";
 
 const InboxPage = () => {
   const count = useSelector((state) => state.mail.count);
   const unread = useSelector((state) => state.mail.unread);
   const Disptach = useDispatch();
-
+  // let token = localStorage.getItem("id");
   useEffect(() => {
-    Disptach(getmailHandler());
+    let token = localStorage.getItem("id");
+    Disptach(getmailHandler(token));
+    Disptach(getDraft(token));
   }, []);
 
   useEffect(() => {
+    let token = localStorage.getItem("id");
     if (count > 0) {
-      Disptach(getmailHandler());
+      Disptach(getmailHandler(token));
     }
   }, [count]);
 
-  useEffect(() => {
-    const intervelid = setInterval(() => {
-      // console.log("setintervelid", intervelid);
-      Disptach(getmailHandler());
-    }, 2000);
+  // useEffect(() => {
+  //   const intervelid = setInterval(() => {
+  //     // console.log("setintervelid", intervelid);
+  //     Disptach(getmailHandler(token));
+  //   }, 2000);
 
-    return () => {
-      // console.log("clearintervelid", intervelid);
-      clearInterval(intervelid);
-    };
-  });
+  //   return () => {
+  //     // console.log("clearintervelid", intervelid);
+  //     clearInterval(intervelid);
+  //   };
+  // });
 
   const sendmailcartHandler = () => {
     Disptach(getmailHandler());
   };
-  const liststyle = { background: "gold", borderRadius: 3, marginTop: 3 };
+  // const liststyle = { background: "gold", borderRadius: 3, marginTop: 3 };
+  const liststyle = {
+    color: "white",
+    "&:hover": {
+      backgroundColor: "gold",
+    },
+  };
   return (
     <>
       <InboxNavbar></InboxNavbar>
@@ -105,7 +115,7 @@ const InboxPage = () => {
                 </IconButton>
               </ListItem>
             </Link>
-            <Link to="#" style={{ textDecoration: "none" }}>
+            <Link to="draft-mail" style={{ textDecoration: "none" }}>
               <ListItem button sx={liststyle}>
                 Draft
                 <IconButton
@@ -129,6 +139,12 @@ const InboxPage = () => {
             <Route
               path="/sentmessage/sentmailview"
               element={<SentMessageView />}
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/draft-mail/draftmail-view"
+              element={<DraftMessageView />}
             />
           </Routes>
 

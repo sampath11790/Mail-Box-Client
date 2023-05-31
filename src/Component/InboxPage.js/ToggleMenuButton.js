@@ -38,7 +38,7 @@ export default function ToggleButtonElement() {
       icon: <MailIcon></MailIcon>,
       path: "/main/sentmessage",
     },
-    { name: "Drafts", icon: <Drafts />, path: "#" },
+    { name: "Drafts", icon: <Drafts />, path: "/main/draft-mail" },
   ];
   const list = (
     <Box
