@@ -17,16 +17,6 @@ import {
 
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const boxstyle = {
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  boxShadow: "0px 2px 4px lightgreen",
-  padding: "10px",
-  borderRadius: "8px",
-  background: Readreceipt ? "lightblue" : "",
-};
 const mailview = {
   fontSize: 10,
   display: "flex",
@@ -60,6 +50,16 @@ const InboxListItem = (props) => {
 
     const dateTimeString = dateString + " " + timeString;
     return dateTimeString;
+  };
+  const boxstyle = {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    boxShadow: "0px 2px 4px lightgreen",
+    padding: "10px",
+    borderRadius: "8px",
+    background: Readreceipt ? "lightblue" : "",
   };
   return (
     <>

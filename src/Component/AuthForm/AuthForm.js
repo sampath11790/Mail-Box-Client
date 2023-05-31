@@ -1,13 +1,17 @@
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useEffect } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { sendsignup, Sendlogin } from "../../Store/Action-thunk";
 import { UisliceAction } from "../../Store/Uivisible";
-import { LocalActivityOutlined, LockPersonRounded } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
-
+import {
+  LocalActivityOutlined,
+  LockPersonRounded,
+  VpnLockOutlined,
+} from "@mui/icons-material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
+import nature from "../../Assets/nature.jpeg";
 const AuthForm = () => {
   const Disptach = useDispatch();
   const islogin = useSelector((state) => state.uiauth.islogin);
@@ -40,11 +44,37 @@ const AuthForm = () => {
   };
   return (
     <Container className="pt-5 ">
-      <Row className="justify-content-md-center bg-green">
-        <Col xs={12} md={4}>
+      <Box
+        sx={{
+          width: "100%",
+          margin: "0 auto",
+          // backgroundColor: "#f5f5f5",
+          padding: "3px",
+          borderRadius: "8px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
+        <Typography variant="h1">
+          <span className="g-letter">G</span>
+          <span className="mail-letter">Mail</span>
+        </Typography>
+        <Typography variant="h5">
+          A place to connect, communicate, and stay organized. Join{" "}
+          <span style={{ color: "green", fontSize: 30 }}>G</span>
+          <span style={{ color: "gold", fontSize: 20 }}>Mail</span>
+          today!"
+        </Typography>
+      </Box>
+      <Row className="justify-content-md-center ">
+        <Col xs={12} md={5}>
           <Form
-            className="shadow p-3 mt-5 bg-white rounded"
+            className="shadow p-3 mt-5 bg-green rounded"
             onSubmit={onsubmitHandler}
+            style={{ background: "lightgreen" }}
           >
             <h3>
               {islogin ? "Login" : "SignUp"}
@@ -84,24 +114,74 @@ const AuthForm = () => {
                 ></Form.Control>
               </Form.Group>
             )}
-            <Button
-              type="submit"
-              variant="primary"
-              className="btn btn-primary btn-lg btn-block mb-2"
-            >
-              {islogin ? "Login" : "SignUp"}
-            </Button>
-            <Form.Group controlId="btn-secondary">
+            <Box sx={{ marginTop: 6 }}>
               <Button
-                className="btn btn-secondary btn-lg btn-block"
-                onClick={buttonToggle}
+                variant="contained"
+                type="submit"
+                sx={{
+                  borderRadius: 2,
+                  fontWeight: "bold",
+                  fontSize: { sx: 14, md: 17 },
+                  marginRight: 3,
+                  background: "green",
+                }}
               >
-                {islogin ? "SignUp" : "Login existing account"}
+                {islogin ? "Login" : "SignUp"}
               </Button>
-            </Form.Group>
+
+              <Button
+                variant="contained"
+                onClick={buttonToggle}
+                sx={{
+                  marginRight: 2,
+                  borderRadius: 2,
+                  // fontWeight: "bold",
+                  padding: "0 5",
+                  background: "gold",
+                  fontSize: { sx: 14, md: 17 },
+                }}
+              >
+                {islogin ? "SignUp" : "Login  account"}
+              </Button>
+            </Box>
           </Form>
           <p>TestLogin id =demo@gmail.com</p>
           <p>TestLogin password =123456</p>
+        </Col>
+        <Col xs={12} md={6}>
+          <Typography
+            variant="h5"
+            sx={{
+              width: "100%",
+              margin: "0 auto",
+              // backgroundColor: "lightgreen",
+              padding: "1px",
+              borderRadius: "8px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              marginTop: 7,
+              height: { sx: "100%", md: "70%" },
+              // boxShadow: "3px 1px 20px lightgreen",
+              position: "relative",
+              // color: "white",
+              // fontWeight: "bold",
+              fontSize: 17,
+            }}
+          >
+            <span className="formpage-image">
+              <img src={nature}></img>
+            </span>
+            <span className="formpage-p">
+              Our application provides a secure and safe environment for all
+              your communication needs. With our advanced features and
+              user-friendly interface, you can easily manage your emails and
+              stay organized. Join us today and experience hassle-free email
+              management!
+            </span>
+          </Typography>
         </Col>
       </Row>
     </Container>

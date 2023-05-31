@@ -25,3 +25,57 @@ body a {
   z-index: 20;
   background-color: rgba(242, 238, 238, 0.75);
 } */
+.formpage-image {
+  position: absolute;
+  z-index: -10;
+  top: -20px;
+}
+.formpage-image img {
+  /* width: 625px;
+  height: 320px; */
+  border-radius: 3px;
+}
+
+.formpage-p {
+  font-family: "Century Gothic";
+  text-align: start;
+  position: relative;
+  bottom: -130px;
+  /* right: -90px; */
+  /* background: rgb(211, 250, 211); */
+  border-radius: 30px;
+  width: 100%;
+}
+.g-letter {
+  color: green;
+  font-size: 100px;
+  font-family: "Century Gothic";
+}
+.mail-letter {
+  color: rgb(252, 217, 22);
+  font-size: 55px;
+  font-family: "Century Gothic";
+}
+@media screen and (max-width: 900px) {
+  .formpage-p {
+    /* background: yellow; */
+    margin-top: 10px;
+    font-family: "Century Gothic";
+    font-size: medium;
+  }
+
+  .formpage-image img {
+    width: 100%;
+    bottom: 0;
+    border-radius: 3px;
+  }
+  .g-letter {
+    color: green;
+    font-size: 60px;
+  }
+  .mail-letter {
+    color: gold;
+    font-size: 45px;
+    /* background: #000; */
+  }
+}
