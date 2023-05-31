@@ -13,14 +13,13 @@ import { MailOutline, Send } from "@mui/icons-material";
 import { Create, Drafts } from "@mui/icons-material";
 import { Grid, List, Badge, IconButton, ListItem } from "@mui/material";
 
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import DraftMessageView from "./DrfatMail/draftMessageView";
 
 const InboxPage = () => {
   const count = useSelector((state) => state.mail.count);
   const unread = useSelector((state) => state.mail.unread);
   const Disptach = useDispatch();
-  // let token = localStorage.getItem("id");
+
   useEffect(() => {
     let token = localStorage.getItem("id");
     Disptach(getmailHandler(token));
@@ -49,7 +48,35 @@ const InboxPage = () => {
   const sendmailcartHandler = () => {
     Disptach(getmailHandler());
   };
-  // const liststyle = { background: "gold", borderRadius: 3, marginTop: 3 };
+  const listItems = [
+    {
+      to: "text-edit",
+      label: "Compose",
+      icon: <Create />,
+    },
+    {
+      to: "inboxlist",
+      label: "Inbox",
+      icon:
+        unread > 0 ? (
+          <Badge badgeContent={unread} color="error">
+            <MailOutline />
+          </Badge>
+        ) : (
+          <MailOutline />
+        ),
+    },
+    {
+      to: "sentmessage",
+      label: "SentMail",
+      icon: <Send />,
+    },
+    {
+      to: "draft-mail",
+      label: "Draft",
+      icon: <Drafts />,
+    },
+  ];
   const liststyle = {
     color: "white",
     "&:hover": {
@@ -69,68 +96,30 @@ const InboxPage = () => {
           sx={{ display: { xs: "none", md: "block" } }}
         >
           <List component="nav">
-            <Link to="text-edit" style={{ textDecoration: "none" }}>
-              <ListItem button sx={liststyle}>
-                Compose
-                <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
-                  style={{ marginLeft: "auto" }}
+            {listItems.map((item, index) => (
+              <Link key={index} to={item.to} style={{ textDecoration: "none" }}>
+                <ListItem
+                  button
+                  onClick={
+                    item.label === "SentMail" ? sendmailcartHandler : null
+                  }
+                  sx={liststyle}
                 >
-                  <Create></Create>
-                </IconButton>
-              </ListItem>
-            </Link>
-            <Link to="inboxlist" style={{ textDecoration: "none" }}>
-              <ListItem button sx={liststyle}>
-                Inbox
-                <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
-                  style={{ marginLeft: "auto" }}
-                >
-                  {unread > 0 ? (
-                    <Badge badgeContent={unread} color="error">
-                      <NotificationsIcon />
-                    </Badge>
-                  ) : (
-                    <MailOutline></MailOutline>
-                  )}
-                </IconButton>
-              </ListItem>
-            </Link>
-
-            <Link to="sentmessage" style={{ textDecoration: "none" }}>
-              <ListItem button onClick={sendmailcartHandler} sx={liststyle}>
-                SentMail
-                <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
-                  style={{ marginLeft: "auto" }}
-                >
-                  <Send></Send>
-                </IconButton>
-              </ListItem>
-            </Link>
-            <Link to="draft-mail" style={{ textDecoration: "none" }}>
-              <ListItem button sx={liststyle}>
-                Draft
-                <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
-                  style={{ marginLeft: "auto" }}
-                >
-                  <Drafts></Drafts>
-                </IconButton>
-              </ListItem>
-            </Link>
+                  {item.label}
+                  <IconButton
+                    size="large"
+                    aria-label={`show ${index} new notifications`}
+                    color="inherit"
+                    style={{ marginLeft: "auto" }}
+                  >
+                    {item.icon}
+                  </IconButton>
+                </ListItem>
+              </Link>
+            ))}
           </List>
         </Grid>
-        {/* </Box> */}
+
         <Grid item xs={12} sm={12} md={10}>
           <Routes>
             <Route path="/inboxlist/mailview" element={<MessageView />} />

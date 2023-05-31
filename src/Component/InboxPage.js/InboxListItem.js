@@ -14,17 +14,26 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import ClockIcon from "@mui/icons-material/AccessTimeRounded";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CalendarIcon from "@mui/icons-material/CalendarTodayRounded";
-import {
-  CloudCircleOutlined,
-  LockClockSharp,
-  PunchClock,
-  Timelapse,
-  TimelapseRounded,
-} from "@mui/icons-material";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+
+const boxstyle = {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  boxShadow: "0px 2px 4px lightgreen",
+  padding: "10px",
+  borderRadius: "8px",
+  background: Readreceipt ? "lightblue" : "",
+};
+const mailview = {
+  fontSize: 10,
+  display: "flex",
+  textAlign: "end",
+  width: "100%",
+  flexDirection: "column",
+};
 const InboxListItem = (props) => {
   const Dispatch = useDispatch();
   let token = localStorage.getItem("id");
@@ -55,21 +64,8 @@ const InboxListItem = (props) => {
   return (
     <>
       <ListItem button>
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            boxShadow: "0px 2px 4px lightgreen",
-            padding: "10px",
-            borderRadius: "8px",
-            background: Readreceipt ? "lightblue" : "",
-          }}
-          onClick={ListItemHandler}
-        >
+        <Box sx={boxstyle} onClick={ListItemHandler}>
           <ListItemText>
-            {/* <div className="readreceiptbox"> */}
             {Readreceipt && (
               <Badge color="secondary" variant="dot" sx={{ marginRight: 2 }}>
                 {Readreceipt && <MailIcon />}
@@ -78,16 +74,7 @@ const InboxListItem = (props) => {
 
             <Link to="mailview">
               {props.From}
-              <Box
-                sx={{
-                  fontSize: 10,
-                  display: "flex",
-                  textAlign: "end",
-                  width: "100%",
-                  flexDirection: "column",
-                  padding: "-5px",
-                }}
-              >
+              <Box sx={mailview}>
                 {/* <CalendarIcon /> */}
                 {ExtractTime(props.createdAt)}
               </Box>

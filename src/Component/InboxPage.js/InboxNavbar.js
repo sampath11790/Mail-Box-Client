@@ -207,14 +207,6 @@ export default function InboxNavbar() {
             <span className="mail">mail</span>
           </Typography>
 
-          {/* <Typography
-            variant="div"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "block", sm: "none" } }}
-          >
-            <span className="G">G</span>
-          </Typography> */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -291,7 +283,6 @@ export default function InboxNavbar() {
             </IconButton>
           </Box>
         </Toolbar>
-        {/* <ToggleButton></ToggleButton> */}
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
